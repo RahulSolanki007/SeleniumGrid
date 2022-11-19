@@ -1,4 +1,5 @@
 package com.mytest;
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -20,11 +21,12 @@ public class BaseTest {
 	
     @Parameters({"browser"})
 	@BeforeMethod
-	public void setUp(String browserName) {
+	public void setUp(String browserName, Method name) {
 		
 		System.out.println("browser name is : " + browserName);
-		
+		String methodName = name.getName();
        MutableCapabilities sauceOption = new MutableCapabilities();
+       sauceOption.setCapability("name", methodName);
        sauceOption.setCapability("username", "oauth-solanki.rahul680-ae1fb");
        sauceOption.setCapability("accessKey", "381f86ed-c852-4f1b-818a-6ed6115056a5");
        
